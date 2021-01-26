@@ -1,0 +1,78 @@
+:root {
+  --animation-duration: 1s;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expanding-cards__list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: nowrap row;
+  max-width: 100%;
+  width: 100%;
+}
+
+.expanding-cards__item {
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  display: none;
+  position: relative;
+  min-height: 100vh;
+  flex: 0.5;
+  transition: flex var(--animation-duration) ease-in-out;
+  overflow: hidden;
+}
+
+.expanding-cards__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.expanding-cards__item--expanded {
+  flex: 5;
+}
+
+.expanding-cards__item:nth-child(-n + 3) {
+  display: block;
+}
+
+.expanding-cards__title {
+  position: absolute;
+  opacity: 0;
+  bottom: 0;
+  left: 0;
+  color: white;
+  margin: 3rem;
+  white-space: nowrap;
+  transition: opacity calc(var(--animation-duration / 2.5)) ease-in
+    calc(var(--animation-duration) / 2);
+}
+
+.expanding-cards__item--expanded > .expanding-cards__title {
+  opacity: 1;
+}
+
+@media (min-width: 50rem) {
+  .expanding-cards__item {
+    display: block;
+  }
+}
